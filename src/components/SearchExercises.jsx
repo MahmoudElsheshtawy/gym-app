@@ -5,16 +5,16 @@ import { fechData } from '../utils/fechData';
 import { exerseseOption,fetchData } from '../utils/fechData';
 import HorizontalScrollbar from './HorizontalScrollbar';
 
-const SearchExercises = () => {
+const SearchExercises = ({ setExercises , setBodypart , bodypart  }) => {
+
   const [search, setSearch]=useState("");
-  const [exercises, setExercises]=useState([]);
-  const [bodypart, setbodypart]=useState([]);
+  const [bodyparts, setbodyparts]=useState([]);
 
   useEffect(()=>{
     const fechexersicsedata =async()=>{
       const bodyPartData = await fetchData ('https://exercisedb.p.rapidapi.com/exercises/bodyPartList',exerseseOption)
          
-       setbodypart(['all' ,...bodyPartData])
+       setbodyparts(['all' ,...bodyPartData])
 
     }
     fechexersicsedata();
@@ -61,7 +61,7 @@ const SearchExercises = () => {
 
 
       <Box position={'relative'} width={'100%'} padding={'20px'} >
-     <HorizontalScrollbar data={bodypart}/>
+     <HorizontalScrollbar data={bodyparts} bodypart={bodypart} setBodypart={setBodypart}/>
       </Box>
         </Stack>
    
